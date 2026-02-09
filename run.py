@@ -1,21 +1,43 @@
-def main(zakaz):
+def order_list():
     with open(r"DATA\22.txt", "r") as file:
-        data = [i.strip().split("\n") for i in file.read().split("#@#\n")[1:]]
-        for i in data:
-            if i[0][:4] == zakaz:
-                return [
-                    j.replace("||", "|", 1).replace("/", "|").split("|")[:9]
-                    for j in i[2:]
-                ]
+        return [i.strip().split("\n") for i in file.read().split("#@#\n")[1:]]
 
 
-def main_2(zakaz):
-    with open(r"DATA\22.txt", "r") as file:
-        data = [i.strip().split("\n") for i in file.read().split("#@#\n")[1:]]
-        for i in data:
-            if i[0][:4] == zakaz:
-                return [j.split("|") for j in i[:2]]
+def order_work(zakaz):
+    for i in order_list():
+        if i[0][:4] == zakaz:
+            return [
+                j.replace("||", "|", 1).replace("/", "|").split("|")[:9] for j in i[2:]
+            ]
+    return []
+
+
+def str_all(zakaz):
+    for i in order_list():
+        if i[0][:4] == zakaz:
+            return [j.split("|") for j in i[:2]]
+    return []
+
+
+def str_one(zakaz):
+    for i in order_list():
+        if i[0][:4] == zakaz:
+            return i[0].split("|")
+    return []
+
+
+def str_two(zakaz):
+    for i in order_list():
+        if i[0][:4] == zakaz:
+            return i[1].split("|")
+    return []
 
 
 if __name__ == "__main__":
-    print(main_2("0002")[0])
+    for i in order_work("0002"):
+        print(i)
+    my_data = str_all("0002")
+    print(my_data[0][1])
+    print(my_data[1][25])
+    print(str_one("0004")[1])
+    print(str_two("0004")[25])
