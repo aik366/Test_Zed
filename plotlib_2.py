@@ -3,7 +3,8 @@ import utils
 
 # Данные
 god = 2024
-months = ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек']
+months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль',
+          'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
 values = [utils.metraj_year(god=int(str(god)[-2:]), months=i) for i in range(1, 13)]
 
 # График
@@ -37,7 +38,12 @@ for bar, val in zip(bars, values):
 # Оформление
 ax.set_title(f'Метраж на {god} год', fontsize=16, fontweight='bold', pad=20)
 ax.grid(axis='y', linestyle='--', alpha=0.4)
-plt.xticks(rotation=0)
+
+# Поворот меток X, если нужно (для плотных данных)
+plt.xticks(rotation=45, ha='right')
+
+# Автоматическая подгонка, чтобы ничего не обрезалось
 plt.tight_layout()
+
 plt.savefig("sine_plot.png", dpi=300, bbox_inches="tight")
 plt.show()
