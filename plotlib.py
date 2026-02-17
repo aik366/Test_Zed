@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 
-import run
+import utils
 
 # Данные
-y = [run.metraj_year(god=25, months=i) for i in range(1, 13)]
+y = [utils.metraj_year(god=25, months=i) for i in range(1, 13)]
 mount = ["Янв", "Фев", "Март", "Апр", "Май", "Июнь", "Июль", "Авг", "Сен", "Окт", "Ноя", "Дек"]
 x = [f"{mount[i]}\n{y[i]:.0f}" for i in range(12)]
 
