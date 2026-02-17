@@ -13,8 +13,8 @@ def order_year(god: str = year) -> list:
     shutil.copyfile(f'{put}{god}.RSB', f'DATA/22.txt')
     with open(r"DATA\22.txt", "r", encoding='utf-8') as file:
         return [i.strip().split("\n") for i in file.read().split("#@#\n")[1:]]
-    
-    
+
+
 def order_two_year(god: str = year) -> list:
     shutil.copyfile(f'{put}{god}.RSB', f'DATA/22.txt')
     shutil.copyfile(f'{put}{int(god) - 1}.RSB', f'DATA/22_two.txt')
@@ -24,14 +24,15 @@ def order_two_year(god: str = year) -> list:
     with open(r"DATA\22_two.txt", "r") as file_two:
         return [i.strip().split("\n")[:2] for i in file_two.read().split("#@#\n")[1:]]
 
-def metraj_year(year: str = year, month: str = month) -> list:
+
+def metraj_year(god: int = year, months: int = month) -> float:
     summ = 0.0
-    for i in order_two_year(year):
+    for i in order_two_year(str(god)):
         str_split = i[0].split("|")
-        if str_split[5][:2] == str(year) and str_split[14] == f"{month:02}":
+        if str_split[5][:2] == str(god) and str_split[14] == f"{months:02}":
             summ += float(str_split[23])
-            # print(str_split[0], str_split[23])
-    return round(summ, 2)       
+    return round(summ, 2)
+
 
 def order_work(order: str, god: str = year) -> list:
     for i in order_year(god):
@@ -72,9 +73,8 @@ if __name__ == "__main__":
     # my_data: list = str_all("0002")
     # my_data_1: list = str_all("0002", year_1)
     # # my_data_two: int = len(order_two_year())
-    
+
     # print(my_data[0][1], my_data[1][25])
     # print(my_data_1[0][1], my_data[1][25])
     # print(str_one("0004")[1], str_two("0004")[25])
     # print(str_one("0004", year_1)[1], str_two("0004", year_1)[25])
-    
